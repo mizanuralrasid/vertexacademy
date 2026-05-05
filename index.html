@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuitionPoint | Quick Apply</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #e8f0fe 0%, #fef7e0 50%, #fce8e6 100%);
+            min-height: 100vh;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 28px;
+        }
+        .step-inactive { display: none; }
+        .transition-all { transition: all 0.3s ease; }
+        .btn-hover:hover { background: rgba(255, 255, 255, 0.7); transform: translateY(-2px); }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Header -->
+    <nav class="max-w-4xl mx-auto flex justify-between items-center mb-6 px-4">
+        <h1 class="text-2xl font-bold text-blue-600">TuitionPoint</h1>
+        <span class="text-xs font-bold text-gray-400 bg-white/40 px-3 py-1 rounded-full uppercase">Direct Application</span>
+    </nav>
+
+    <!-- Main Card -->
+    <div class="max-w-2xl mx-auto glass shadow-2xl overflow-hidden">
+        
+        <!-- Navigation Bar -->
+        <div class="p-4 border-b border-white/30 flex items-center justify-between bg-white/20">
+            <button id="backBtn" onclick="prevStep()" class="hidden text-gray-600 hover:text-blue-600 flex items-center font-medium">
+                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                Back
+            </button>
+            <div id="stepIndicator" class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-auto">
+                Step 1 of 6
+            </div>
+        </div>
+
+        <div class="p-8 min-h-[440px] flex flex-col">
+            
+            <!-- STEP 1: LOCATION -->
+            <div id="step1" class="step">
+                <h2 class="text-2xl font-bold mb-2">Location</h2>
+                <p class="text-gray-500 mb-6">Where do you need the tutor?</p>
+                <div class="grid gap-3">
+                    <button onclick="nextStep(1, 'Dhubri Town')" class="glass p-4 text-left btn-hover transition-all">Dhubri Town</button>
+                    <button onclick="nextStep(1, 'Gauripur')" class="glass p-4 text-left btn-hover transition-all">Gauripur</button>
+                    <button onclick="nextStep(1, 'Bidyapara')" class="glass p-4 text-left btn-hover transition-all">Bidyapara</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: CLASS -->
+            <div id="step2" class="step step-inactive">
+                <h2 class="text-2xl font-bold mb-6">Select Class</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="nextStep(2, 'Class 9')" class="glass p-4 btn-hover transition-all">Class 9</button>
+                    <button onclick="nextStep(2, 'Class 10')" class="glass p-4 btn-hover transition-all">Class 10</button>
+                    <button onclick="nextStep(2, 'Class 11')" class="glass p-4 btn-hover transition-all">Class 11</button>
+                    <button onclick="nextStep(2, 'Class 12')" class="glass p-4 btn-hover transition-all">Class 12</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: SUBJECT -->
+            <div id="step3" class="step step-inactive">
+                <h2 class="text-2xl font-bold mb-6">Select Subject</h2>
+                <div class="grid gap-3">
+                    <button onclick="nextStep(3, 'Mathematics')" class="glass p-4 text-left btn-hover">📐 Mathematics</button>
+                    <button onclick="nextStep(3, 'Science')" class="glass p-4 text-left btn-hover">🧬 Science</button>
+                    <button onclick="nextStep(3, 'English')" class="glass p-4 text-left btn-hover">📚 English</button>
+                </div>
+            </div>
+
+            <!-- STEP 4: TEACHERS -->
+            <div id="step4" class="step step-inactive">
+                <h2 class="text-2xl font-bold mb-6">Available Teachers</h2>
+                <div id="teacherOptions" class="grid gap-3"></div>
+            </div>
+
+            <!-- STEP 5: PLANS -->
+            <div id="step5" class="step step-inactive">
+                <h2 class="text-2xl font-bold mb-6">Tuition Plan</h2>
+                <div class="grid gap-4">
+                    <div onclick="nextStep(5, 'Basic (3 Days/Week)')" class="glass p-5 cursor-pointer border-l-4 border-blue-500 btn-hover">
+                        <h3 class="font-bold">Basic</h3>
+                        <p class="text-sm text-gray-500">₹1,200 per month</p>
+                    </div>
+                    <div onclick="nextStep(5, 'Premium (5 Days/Week)')" class="glass p-5 cursor-pointer border-l-4 border-red-500 btn-hover">
+                        <h3 class="font-bold">Premium</h3>
+                        <p class="text-sm text-gray-500">₹2,000 per month</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 6: FINISH -->
+            <div id="step6" class="step step-inactive">
+                <h2 class="text-2xl font-bold mb-4">Application Preview</h2>
+                <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100 mb-8">
+                    <ul class="space-y-2 text-sm text-gray-700" id="summaryList">
+                        <!-- Summary goes here -->
+                    </ul>
+                </div>
+                <button onclick="sendApplication()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 shadow-xl transition-all">
+                    Apply via Gmail
+                </button>
+                <p class="mt-4 text-xs text-center text-gray-400 font-medium">This will open your Gmail app to send the request.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let appData = { location: '', class: '', subject: '', teacher: '', plan: '' };
+
+        const teachersList = {
+            'Dhubri Town': ['Mizanur Islam (Full Stack)', 'Priya Das (English)'],
+            'Gauripur': ['Rahul Sarma (Math)', 'S. Begum (Science)'],
+            'Bidyapara': ['Anisur Rahman (CS)']
+        };
+
+        function updateUI() {
+            // Show/Hide Back Button
+            const backBtn = document.getElementById('backBtn');
+            currentStep > 1 ? backBtn.classList.remove('hidden') : backBtn.classList.add('hidden');
+            
+            // Step counter
+            document.getElementById('stepIndicator').innerText = `Step ${currentStep} of 6`;
+
+            // Prepare Final Summary
+            if(currentStep === 6) {
+                const list = document.getElementById('summaryList');
+                list.innerHTML = `
+                    <li><strong>Location:</strong> ${appData.location}</li>
+                    <li><strong>Class:</strong> ${appData.class}</li>
+                    <li><strong>Subject:</strong> ${appData.subject}</li>
+                    <li><strong>Teacher:</strong> ${appData.teacher}</li>
+                    <li><strong>Plan:</strong> ${appData.plan}</li>
+                `;
+            }
+        }
+
+        function nextStep(step, value) {
+            const dataKeys = ['', 'location', 'class', 'subject', 'teacher', 'plan'];
+            appData[dataKeys[step]] = value;
+
+            if(step === 1) populateTeachers(value);
+
+            document.getElementById(`step${step}`).classList.add('step-inactive');
+            currentStep = step + 1;
+            document.getElementById(`step${currentStep}`).classList.remove('step-inactive');
+            updateUI();
+        }
+
+        function prevStep() {
+            if(currentStep > 1) {
+                document.getElementById(`step${currentStep}`).classList.add('step-inactive');
+                currentStep--;
+                document.getElementById(`step${currentStep}`).classList.remove('step-inactive');
+                updateUI();
+            }
+        }
+
+        function populateTeachers(loc) {
+            const container = document.getElementById('teacherOptions');
+            const list = teachersList[loc] || ['General Area Tutor'];
+            container.innerHTML = list.map(name => `
+                <button onclick="nextStep(4, '${name}')" class="glass p-4 text-left btn-hover transition-all">${name}</button>
+            `).join('');
+        }
+
+        function sendApplication() {
+            const recipient = "imizanur13@gmail.com";
+            const mailSubject = encodeURIComponent(`New Tuition Request: ${appData.subject}`);
+            const mailBody = encodeURIComponent(
+                `Tuition Application Details:\n` +
+                `--------------------------------\n` +
+                `Teacher: ${appData.teacher}\n` +
+                `Subject: ${appData.subject}\n` +
+                `Class: ${appData.class}\n` +
+                `Location: ${appData.location}\n` +
+                `Plan: ${appData.plan}\n\n` +
+                `Please contact me regarding my interest.`
+            );
+
+            window.location.href = `mailto:${recipient}?subject=${mailSubject}&body=${mailBody}`;
+        }
+
+        updateUI();
+    </script>
+</body>
+</html>
