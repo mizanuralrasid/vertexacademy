@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TuitionPoint | Quick Apply</title>
+    <title>TuitionPoint | Direct Apply</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -19,41 +19,55 @@
         }
         .step-inactive { display: none; }
         .transition-all { transition: all 0.3s ease; }
-        .btn-hover:hover { background: rgba(255, 255, 255, 0.7); transform: translateY(-2px); }
+        .btn-hover:hover { 
+            background: rgba(255, 255, 255, 0.7); 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
     <nav class="max-w-4xl mx-auto flex justify-between items-center mb-10 px-4">
         <h1 class="text-2xl font-bold text-blue-600">TuitionPoint</h1>
-        <span class="text-xs font-bold text-gray-400 bg-white/40 px-3 py-1 rounded-full uppercase">Direct Application</span>
+        <span class="text-xs font-bold text-gray-400 bg-white/40 px-3 py-1 rounded-full uppercase">Academic Portal</span>
     </nav>
 
-    <!-- HERO SECTION: DIRECTIONS -->
-    <div id="heroSection" class="max-w-4xl mx-auto text-center px-4 mb-12">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Find Your Perfect Tutor</h2>
-        <p class="text-gray-600 text-lg mb-10">Follow the steps below to apply via Gmail.</p>
+    <!-- HERO SECTION: SHOWING STEPS ON FIRST PAGE -->
+    <div id="heroSection" class="max-w-5xl mx-auto text-center px-4 mb-12">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6">Apply in 4 Easy Steps</h2>
+        <p class="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">Quickly find the best tutors in your area and start your learning journey today.</p>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div class="glass p-6">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 font-bold shadow-inner">1</div>
+        <!-- STEP VISUALIZATIONS -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+            <div class="glass p-6 relative">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">1</div>
+                <div class="text-3xl mb-3 mt-2">📍</div>
                 <h3 class="font-bold text-gray-800 mb-1">Select Info</h3>
-                <p class="text-xs text-gray-500">Choose location and subject.</p>
+                <p class="text-xs text-gray-500">Pick your location, class, and subject.</p>
             </div>
-            <div class="glass p-6">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 font-bold shadow-inner">2</div>
-                <h3 class="font-bold text-gray-800 mb-1">Pick Teacher</h3>
-                <p class="text-xs text-gray-500">Select an expert in your area.</p>
+            <div class="glass p-6 relative">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">2</div>
+                <div class="text-3xl mb-3 mt-2">👨‍🏫</div>
+                <h3 class="font-bold text-gray-800 mb-1">Choose Tutor</h3>
+                <p class="text-xs text-gray-500">See available teachers for your area.</p>
             </div>
-            <div class="glass p-6">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 font-bold shadow-inner">3</div>
-                <h3 class="font-bold text-gray-800 mb-1">Send Mail</h3>
-                <p class="text-xs text-gray-500">Finalize and open your Gmail app.</p>
+            <div class="glass p-6 relative">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">3</div>
+                <div class="text-3xl mb-3 mt-2">💳</div>
+                <h3 class="font-bold text-gray-800 mb-1">Pick a Plan</h3>
+                <p class="text-xs text-gray-500">Choose Basic or Premium sessions.</p>
+            </div>
+            <div class="glass p-6 relative">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">4</div>
+                <div class="text-3xl mb-3 mt-2">✉️</div>
+                <h3 class="font-bold text-gray-800 mb-1">Send Email</h3>
+                <p class="text-xs text-gray-500">Finalize and open Gmail to apply.</p>
             </div>
         </div>
 
-        <button onclick="showForm()" class="bg-blue-600 text-white px-12 py-4 rounded-full font-bold text-xl hover:bg-blue-700 shadow-xl transition-all btn-hover">
-            Start Application Now
+        <button onclick="showForm()" class="bg-blue-600 text-white px-16 py-5 rounded-full font-bold text-xl hover:bg-blue-700 shadow-2xl transition-all btn-hover scale-110">
+            Apply Now
         </button>
     </div>
 
@@ -65,156 +79,170 @@
                 <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                 Back
             </button>
-            <div id="stepIndicator" class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-auto">
-                Step 1 of 6
-            </div>
+            <div id="stepIndicator" class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-auto">Step 1 of 6</div>
         </div>
 
-        <div class="p-8 min-h-[460px] flex flex-col justify-center">
+        <div class="p-8 min-h-[500px] flex flex-col justify-center">
             
-            <!-- Steps 1-5 same as before -->
             <div id="step1" class="step">
-                <h2 class="text-2xl font-bold mb-6">Location</h2>
-                <div class="grid gap-3">
-                    <button onclick="nextStep(1, 'Dhuturamari')" class="glass p-4 text-left btn-hover transition-all">Dhuturamari</button>
-                    <button onclick="nextStep(1, 'Oxiguri')" class="glass p-4 text-left btn-hover transition-all">Oxiguri</button>
-                    <button onclick="nextStep(1, 'Hatidhura')" class="glass p-4 text-left btn-hover transition-all">Hatidhura</button>
-                    <button onclick="nextStep(1, 'Basantipur')" class="glass p-4 text-left btn-hover transition-all">Basantipur</button>
-                    <button onclick="nextStep(1, 'Tamarhat')" class="glass p-4 text-left btn-hover transition-all">Tamarhat</button>
-                </div>
+                <h2 class="text-2xl font-bold mb-6">Select Location</h2>
+                <div class="grid gap-3" id="locationOptions"></div>
             </div>
 
             <div id="step2" class="step step-inactive">
                 <h2 class="text-2xl font-bold mb-6">Select Class</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <button onclick="nextStep(2, 'Class 7')" class="glass p-4 btn-hover transition-all">Class 7</button>
-                    <button onclick="nextStep(2, 'Class 8')" class="glass p-4 btn-hover transition-all">Class 8</button>
-                    <button onclick="nextStep(2, 'Class 9')" class="glass p-4 btn-hover transition-all">Class 9</button>
-                    <button onclick="nextStep(2, 'Class 10')" class="glass p-4 btn-hover transition-all">Class 10</button>
-                </div>
+                <div class="grid grid-cols-2 gap-4" id="classOptions"></div>
             </div>
 
             <div id="step3" class="step step-inactive">
                 <h2 class="text-2xl font-bold mb-6">Select Subject</h2>
-                <div class="grid gap-3">
-                    <button onclick="nextStep(3, 'Mathematics')" class="glass p-4 text-left btn-hover">📐 Mathematics</button>
-                    <button onclick="nextStep(3, 'Science')" class="glass p-4 text-left btn-hover">🧬 Science</button>
-                    <button onclick="nextStep(3, 'English')" class="glass p-4 text-left btn-hover">📚 English</button>
-                </div>
+                <div class="grid gap-3" id="subjectOptions"></div>
             </div>
 
             <div id="step4" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-6">Available Teachers</h2>
+                <h2 class="text-2xl font-bold mb-6 text-blue-700">Available Teachers</h2>
                 <div id="teacherOptions" class="grid gap-3"></div>
             </div>
 
             <div id="step5" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-6">Tuition Plan</h2>
+                <h2 class="text-2xl font-bold mb-6">Choose Your Plan</h2>
                 <div class="grid gap-4">
-                    <div onclick="nextStep(5, 'Basic (3 Days/Week) - 12 days Month / one students')" class="glass p-5 cursor-pointer border-l-4 border-blue-500 btn-hover">
-                        <h3 class="font-bold">Basic Plan</h3>
-                        <p class="text-sm text-gray-500">₹1,200 per month</p>
+                    <div onclick="selectPlan('Basic', '₹1,200')" class="glass p-5 cursor-pointer border-l-4 border-blue-500 btn-hover">
+                        <h3 class="font-bold">Basic (3 Days/Week)</h3>
+                        <p class="text-sm text-gray-500">₹1,200/month</p>
                     </div>
-                    <div onclick="nextStep(5, 'Premium (5 Days/Week) - 12 days Month / one students')" class="glass p-5 cursor-pointer border-l-4 border-red-500 btn-hover">
-                        <h3 class="font-bold">Premium Plan</h3>
-                        <p class="text-sm text-gray-500">₹2,000 per month</p>
+                    <div onclick="selectPlan('Premium', '₹2,000')" class="glass p-5 cursor-pointer border-l-4 border-red-500 btn-hover">
+                        <h3 class="font-bold">Premium (5 Days/Week)</h3>
+                        <p class="text-sm text-gray-500">₹2,000/month</p>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP 6: GMAIL PREVIEW -->
             <div id="step6" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-4">Confirm Details</h2>
-                <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100 mb-8">
-                    <ul class="space-y-2 text-sm text-gray-700" id="summaryList"></ul>
-                </div>
+                <h2 class="text-2xl font-bold mb-4">Application Summary</h2>
+                <div class="bg-white/50 p-6 rounded-2xl border border-blue-100 mb-8" id="summaryList"></div>
                 <button onclick="sendApplication()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 shadow-xl transition-all">
-                    Open Gmail & Send
+                    Open Gmail
                 </button>
-                <p class="text-center text-xs text-gray-400 mt-4 italic">This will launch your email app with a pre-written message.</p>
             </div>
 
         </div>
     </div>
 
     <script>
+        const tuitionDB = {
+            'Dhuturamari': {
+                'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
+                'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] },
+                'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
+                'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }
+            },
+            'Hatidhura': {
+                'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
+                'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] },
+                'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
+                'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }
+            },
+            'Oxiguri': {
+                'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
+                'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] },
+                'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
+                'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }
+            }
+        };
+
         let currentStep = 1;
         let appData = { location: '', class: '', subject: '', teacher: '', plan: '' };
 
-        const teachersList = {
-            'Dhubri Town': ['Mizanur Islam (Full Stack)', 'Priya Das (English)'],
-            'Gauripur': ['Rahul Sarma (Math)', 'S. Begum (Science)'],
-            'Bidyapara': ['Anisur Rahman (CS)']
-        };
+        function init() {
+            const container = document.getElementById('locationOptions');
+            container.innerHTML = Object.keys(tuitionDB).map(loc => `
+                <button onclick="selectLocation('${loc}')" class="glass p-4 text-left btn-hover transition-all font-medium">${loc}</button>
+            `).join('');
+        }
 
         function showForm() {
             document.getElementById('heroSection').classList.add('hidden');
             document.getElementById('formCard').classList.remove('hidden');
-            updateUI();
+            move(1);
         }
 
-        function updateUI() {
-            document.getElementById('stepIndicator').innerText = `Step ${currentStep} of 6`;
-            if(currentStep === 6) {
-                document.getElementById('summaryList').innerHTML = `
-                    <li><strong>To:</strong> imizanur13@gmail.com</li>
+        function selectLocation(loc) {
+            appData.location = loc;
+            const container = document.getElementById('classOptions');
+            container.innerHTML = Object.keys(tuitionDB[loc]).map(cls => `
+                <button onclick="selectClass('${cls}')" class="glass p-4 btn-hover transition-all text-center font-medium">${cls}</button>
+            `).join('');
+            move(2);
+        }
+
+        function selectClass(cls) {
+            appData.class = cls;
+            const container = document.getElementById('subjectOptions');
+            container.innerHTML = Object.keys(tuitionDB[appData.location][cls]).map(sub => `
+                <button onclick="selectSubject('${sub}')" class="glass p-4 text-left btn-hover transition-all font-medium">📚 ${sub}</button>
+            `).join('');
+            move(3);
+        }
+
+        function selectSubject(sub) {
+            appData.subject = sub;
+            fetchTeachers();
+            move(4);
+        }
+
+        function fetchTeachers() {
+            const container = document.getElementById('teacherOptions');
+            const teachers = tuitionDB[appData.location][appData.class][appData.subject] || [];
+            container.innerHTML = teachers.map(t => `
+                <button onclick="confirmTeacher('${t}')" class="glass p-4 text-left btn-hover transition-all flex justify-between items-center">
+                    <span class="font-bold">${t}</span>
+                    <span class="text-[10px] bg-green-500 text-white px-2 py-1 rounded-full">AVAILABLE</span>
+                </button>
+            `).join('');
+        }
+
+        function confirmTeacher(t) {
+            appData.teacher = t;
+            move(5);
+        }
+
+        function selectPlan(p, price) {
+            appData.plan = `${p} (${price})`;
+            document.getElementById('summaryList').innerHTML = `
+                <ul class="space-y-2 text-sm">
                     <li><strong>Teacher:</strong> ${appData.teacher}</li>
                     <li><strong>Subject:</strong> ${appData.subject}</li>
                     <li><strong>Class:</strong> ${appData.class}</li>
                     <li><strong>Location:</strong> ${appData.location}</li>
-                `;
-            }
+                    <li class="text-blue-600"><strong>Plan:</strong> ${appData.plan}</li>
+                </ul>
+            `;
+            move(6);
         }
 
-        function nextStep(step, value) {
-            const dataKeys = ['', 'location', 'class', 'subject', 'teacher', 'plan'];
-            appData[dataKeys[step]] = value;
-            if(step === 1) populateTeachers(value);
-
-            document.getElementById(`step${step}`).classList.add('step-inactive');
-            currentStep = step + 1;
-            document.getElementById(`step${currentStep}`).classList.remove('step-inactive');
-            updateUI();
+        function move(step) {
+            document.querySelectorAll('.step').forEach(el => el.classList.add('step-inactive'));
+            document.getElementById(`step${step}`).classList.remove('step-inactive');
+            currentStep = step;
+            document.getElementById('stepIndicator').innerText = `Step ${step} of 6`;
         }
 
         function prevStep() {
-            if(currentStep === 1) {
+            if (currentStep === 1) {
                 document.getElementById('formCard').classList.add('hidden');
                 document.getElementById('heroSection').classList.remove('hidden');
-            } else {
-                document.getElementById(`step${currentStep}`).classList.add('step-inactive');
-                currentStep--;
-                document.getElementById(`step${currentStep}`).classList.remove('step-inactive');
-                updateUI();
-            }
-        }
-
-        function populateTeachers(loc) {
-            const container = document.getElementById('teacherOptions');
-            const list = teachersList[loc] || ['General Area Tutor'];
-            container.innerHTML = list.map(name => `
-                <button onclick="nextStep(4, '${name}')" class="glass p-4 text-left btn-hover transition-all">${name}</button>
-            `).join('');
+            } else { move(currentStep - 1); }
         }
 
         function sendApplication() {
             const recipient = "imizanur13@gmail.com";
-            const subject = encodeURIComponent(`New Tuition Application - ${appData.subject}`);
-            const body = encodeURIComponent(
-                `Hello TuitionPoint Team,\n\n` +
-                `I would like to apply for a tuition session with the following details:\n\n` +
-                `Teacher: ${appData.teacher}\n` +
-                `Subject: ${appData.subject}\n` +
-                `Class: ${appData.class}\n` +
-                `Location: ${appData.location}\n` +
-                `Plan: ${appData.plan}\n\n` +
-                `Please let me know the next steps.\n` +
-                `Regards.`
-            );
-
-            // This triggers the device's default mail client (Gmail)
+            const subject = encodeURIComponent(`Tuition Application: ${appData.subject}`);
+            const body = encodeURIComponent(`Hello,\n\nI want to apply for tuition with ${appData.teacher}.\n\nDetails:\nSubject: ${appData.subject}\nClass: ${appData.class}\nLocation: ${appData.location}\nPlan: ${appData.plan}`);
             window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
         }
+
+        init();
     </script>
 </body>
 </html>
