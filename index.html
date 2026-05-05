@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TuitionPoint | Direct Apply</title>
+    <title>TuitionPoint | Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -11,153 +16,208 @@
             background: linear-gradient(135deg, #e8f0fe 0%, #fef7e0 50%, #fce8e6 100%);
             min-height: 100vh;
         }
+
         .glass {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 28px;
         }
-        .step-inactive { display: none; }
-        .transition-all { transition: all 0.3s ease; }
-        .btn-hover:hover { 
-            background: rgba(255, 255, 255, 0.7); 
-            transform: translateY(-2px); 
+
+        .step-inactive {
+            display: none;
+        }
+
+        .btn-hover:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
+
 <body class="p-4 md:p-8">
 
+    <!-- NAVIGATION -->
     <nav class="max-w-4xl mx-auto flex justify-between items-center mb-10 px-4">
         <h1 class="text-2xl font-bold text-blue-600">TuitionPoint</h1>
-        <span class="text-xs font-bold text-gray-400 bg-white/40 px-3 py-1 rounded-full uppercase">Academic Portal</span>
+        <div id="navAuth"></div>
     </nav>
 
-    <!-- HERO SECTION: SHOWING STEPS ON FIRST PAGE -->
-    <div id="heroSection" class="max-w-5xl mx-auto text-center px-4 mb-12">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6">Apply in 4 Easy Steps</h2>
-        <p class="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">Quickly find the best tutors in your area and start your learning journey today.</p>
-        
-        <!-- STEP VISUALIZATIONS -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-            <div class="glass p-6 relative">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">1</div>
-                <div class="text-3xl mb-3 mt-2">📍</div>
-                <h3 class="font-bold text-gray-800 mb-1">Select Info</h3>
-                <p class="text-xs text-gray-500">Pick your location, class, and subject.</p>
-            </div>
-            <div class="glass p-6 relative">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">2</div>
-                <div class="text-3xl mb-3 mt-2">👨‍🏫</div>
-                <h3 class="font-bold text-gray-800 mb-1">Choose Tutor</h3>
-                <p class="text-xs text-gray-500">See available teachers for your area.</p>
-            </div>
-            <div class="glass p-6 relative">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">3</div>
-                <div class="text-3xl mb-3 mt-2">💳</div>
-                <h3 class="font-bold text-gray-800 mb-1">Pick a Plan</h3>
-                <p class="text-xs text-gray-500">Choose Basic or Premium sessions.</p>
-            </div>
-            <div class="glass p-6 relative">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">4</div>
-                <div class="text-3xl mb-3 mt-2">✉️</div>
-                <h3 class="font-bold text-gray-800 mb-1">Send Email</h3>
-                <p class="text-xs text-gray-500">Finalize and open Gmail to apply.</p>
-            </div>
+    <!-- AUTH SECTION -->
+    <div id="authSection" class="max-w-md mx-auto glass p-8 shadow-2xl mt-10">
+        <div id="loginForm">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Student Login</h2>
+            <input type="email" id="loginEmail" placeholder="Email"
+                class="w-full p-3 mb-4 rounded-xl border border-white/50 bg-white/30 outline-none focus:ring-2 ring-blue-400">
+            <input type="password" id="loginPass" placeholder="Password"
+                class="w-full p-3 mb-6 rounded-xl border border-white/50 bg-white/30 outline-none focus:ring-2 ring-blue-400">
+            <button onclick="handleLogin()"
+                class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-all mb-4 shadow-lg">Login</button>
+            <p class="text-center text-sm text-gray-600">Need an account? <a href="#" onclick="toggleAuth(false)"
+                    class="text-blue-600 font-bold underline">Sign Up</a></p>
         </div>
 
-        <button onclick="showForm()" class="bg-blue-600 text-white px-16 py-5 rounded-full font-bold text-xl hover:bg-blue-700 shadow-2xl transition-all btn-hover scale-110">
-            Apply Now
-        </button>
+        <div id="signupForm" class="hidden">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Register</h2>
+            <input type="text" id="signupName" placeholder="Full Name"
+                class="w-full p-3 mb-4 rounded-xl border border-white/50 bg-white/30 outline-none focus:ring-2 ring-green-400">
+            <input type="email" id="signupEmail" placeholder="Email"
+                class="w-full p-3 mb-4 rounded-xl border border-white/50 bg-white/30 outline-none focus:ring-2 ring-green-400">
+            <input type="password" id="signupPass" placeholder="Password"
+                class="w-full p-3 mb-6 rounded-xl border border-white/50 bg-white/30 outline-none focus:ring-2 ring-green-400">
+            <button onclick="handleSignup()"
+                class="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all mb-4 shadow-lg">Create
+                Account</button>
+            <p class="text-center text-sm text-gray-600">Already have an account? <a href="#" onclick="toggleAuth(true)"
+                    class="text-blue-600 font-bold underline">Login</a></p>
+        </div>
     </div>
 
-    <!-- MAIN FORM CARD -->
-    <div id="formCard" class="max-w-2xl mx-auto glass shadow-2xl overflow-hidden hidden">
-        
-        <div class="p-4 border-b border-white/30 flex items-center justify-between bg-white/20">
-            <button id="backBtn" onclick="prevStep()" class="text-gray-600 hover:text-blue-600 flex items-center font-medium">
-                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                Back
+    <!-- MAIN DASHBOARD -->
+    <div id="dashboard" class="hidden">
+
+        <!-- HERO -->
+        <div id="heroSection" class="max-w-5xl mx-auto text-center px-4 mb-12">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Your Learning Journey Starts Here</h2>
+            <button onclick="showForm()"
+                class="mt-8 bg-blue-600 text-white px-12 py-4 rounded-full font-bold text-lg hover:bg-blue-700 shadow-2xl transition-all btn-hover scale-105">
+                + New Application
             </button>
-            <div id="stepIndicator" class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-auto">Step 1 of 6</div>
         </div>
 
-        <div class="p-8 min-h-[500px] flex flex-col justify-center">
-            
-            <div id="step1" class="step">
-                <h2 class="text-2xl font-bold mb-6">Select Location</h2>
-                <div class="grid gap-3" id="locationOptions"></div>
+        <!-- APPLICATION FLOW -->
+        <div id="formCard"
+            class="max-w-2xl mx-auto glass shadow-2xl overflow-hidden hidden mb-12 border-2 border-blue-200">
+            <div class="p-4 border-b border-white/30 flex items-center justify-between bg-white/20">
+                <button onclick="prevStep()" class="text-gray-600 hover:text-blue-600 flex items-center font-medium">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                    Back
+                </button>
+                <div id="stepIndicator" class="text-xs font-bold text-blue-500 uppercase tracking-widest ml-auto">Step 1
+                    of 6</div>
             </div>
 
-            <div id="step2" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-6">Select Class</h2>
-                <div class="grid grid-cols-2 gap-4" id="classOptions"></div>
-            </div>
-
-            <div id="step3" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-6">Select Subject</h2>
-                <div class="grid gap-3" id="subjectOptions"></div>
-            </div>
-
-            <div id="step4" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-6 text-blue-700">Available Teachers</h2>
-                <div id="teacherOptions" class="grid gap-3"></div>
-            </div>
-
-            <div id="step5" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-6">Choose Your Plan</h2>
-                <div class="grid gap-4">
-                    <div onclick="selectPlan('Basic', '₹1,200')" class="glass p-5 cursor-pointer border-l-4 border-blue-500 btn-hover">
-                        <h3 class="font-bold">Basic (3 Days/Week)</h3>
-                        <p class="text-sm text-gray-500">₹1,200/month</p>
-                    </div>
-                    <div onclick="selectPlan('Premium', '₹2,000')" class="glass p-5 cursor-pointer border-l-4 border-red-500 btn-hover">
-                        <h3 class="font-bold">Premium (5 Days/Week)</h3>
-                        <p class="text-sm text-gray-500">₹2,000/month</p>
+            <div class="p-8 min-h-[400px] flex flex-col justify-center">
+                <div id="step1" class="step">
+                    <h2 class="text-2xl font-bold mb-6">Select Location</h2>
+                    <div class="grid gap-3" id="locationOptions"></div>
+                </div>
+                <div id="step2" class="step step-inactive">
+                    <h2 class="text-2xl font-bold mb-6">Select Class</h2>
+                    <div class="grid grid-cols-2 gap-4" id="classOptions"></div>
+                </div>
+                <div id="step3" class="step step-inactive">
+                    <h2 class="text-2xl font-bold mb-6">Select Subject</h2>
+                    <div class="grid gap-3" id="subjectOptions"></div>
+                </div>
+                <div id="step4" class="step step-inactive">
+                    <h2 class="text-2xl font-bold mb-6 text-blue-600">Select Teacher</h2>
+                    <div id="teacherOptions" class="grid gap-3"></div>
+                </div>
+                <div id="step5" class="step step-inactive">
+                    <h2 class="text-2xl font-bold mb-6">Select Plan</h2>
+                    <div class="grid gap-4" id="planOptions">
+                        <div onclick="selectPlan('Basic', '₹1,200')"
+                            class="glass p-5 cursor-pointer border-l-4 border-blue-500 btn-hover">
+                            <h3 class="font-bold">Basic (3 Days/Week)</h3>
+                            <p class="text-sm">₹1,200/mo</p>
+                        </div>
+                        <div onclick="selectPlan('Premium', '₹2,000')"
+                            class="glass p-5 cursor-pointer border-l-4 border-red-500 btn-hover">
+                            <h3 class="font-bold">Premium (5 Days/Week)</h3>
+                            <p class="text-sm">₹2,000/mo</p>
+                        </div>
                     </div>
                 </div>
+                <div id="step6" class="step step-inactive">
+                    <h2 class="text-2xl font-bold mb-4">Summary</h2>
+                    <div class="bg-white/50 p-6 rounded-2xl mb-8 border" id="summaryList"></div>
+                    <button onclick="sendApplication()"
+                        class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg">Confirm &
+                        Send Email</button>
+                </div>
             </div>
+        </div>
 
-            <div id="step6" class="step step-inactive">
-                <h2 class="text-2xl font-bold mb-4">Application Summary</h2>
-                <div class="bg-white/50 p-6 rounded-2xl border border-blue-100 mb-8" id="summaryList"></div>
-                <button onclick="sendApplication()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 shadow-xl transition-all">
-                    Open Gmail
-                </button>
+        <!-- HISTORY SECTION (Details Fetch) -->
+        <div id="historySection" class="max-w-4xl mx-auto px-4 pb-20">
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">My Applications</h3>
+            <div id="applicationHistory" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Cards appear here -->
             </div>
-
         </div>
     </div>
 
     <script>
         const tuitionDB = {
-            'Dhuturamari': {
-                'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
-                'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] },
-                'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
-                'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }
-            },
-            'Hatidhura': {
-                'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
-                'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] },
-                'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
-                'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }
-            },
-            'Oxiguri': {
-                'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
-                'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] },
-                'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] },
-                'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }
-            }
+            'Dhuturamari': { 'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] }, 'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }, 'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] }, 'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] } },
+            'Hatidhura': { 'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] }, 'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }, 'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] }, 'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] } },
+            'Oxiguri': { 'Class 10': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] }, 'Class 9': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] }, 'Class 8': { 'Mathematics': ['Mizanur Islam'], 'Science': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'] }, 'Class 7': { 'Mathematics': ['Mizanur Islam'], 'English': ['Mamnur Rashid khan'], 'Science': ['Mizanur Islam'] } }
         };
 
         let currentStep = 1;
         let appData = { location: '', class: '', subject: '', teacher: '', plan: '' };
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
-        function init() {
-            const container = document.getElementById('locationOptions');
-            container.innerHTML = Object.keys(tuitionDB).map(loc => `
-                <button onclick="selectLocation('${loc}')" class="glass p-4 text-left btn-hover transition-all font-medium">${loc}</button>
+        function toggleAuth(isLogin) {
+            document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
+            document.getElementById('signupForm').classList.toggle('hidden', isLogin);
+        }
+
+        function handleSignup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const pass = document.getElementById('signupPass').value;
+            if (!name || !email || !pass) return alert("Please fill all fields");
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.find(u => u.email === email)) return alert("Email already exists");
+
+            users.push({ name, email, pass });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert("Signup successful! Please login.");
+            toggleAuth(true);
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.pass === pass);
+
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                checkState();
+            } else alert("Invalid credentials");
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            location.reload();
+        }
+
+        function checkState() {
+            if (currentUser) {
+                document.getElementById('authSection').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                document.getElementById('navAuth').innerHTML = `
+        <span class="mr-3 font-bold text-gray-700">
+            <span style="font-family: 'Playwrite DE SAS', cursive;">Hello</span> ${currentUser.name}
+        </span>
+        <button onclick="logout()" class="bg-red-500 text-white px-4 py-1 rounded-full text-xs font-bold">Logout</button>`;
+                initBooking();
+                fetchHistory();
+            }
+        }
+
+        function initBooking() {
+            document.getElementById('locationOptions').innerHTML = Object.keys(tuitionDB).map(loc => `
+                <button onclick="selectLocation('${loc}')" class="glass p-4 text-left btn-hover font-medium">${loc}</button>
             `).join('');
         }
 
@@ -169,55 +229,42 @@
 
         function selectLocation(loc) {
             appData.location = loc;
-            const container = document.getElementById('classOptions');
-            container.innerHTML = Object.keys(tuitionDB[loc]).map(cls => `
-                <button onclick="selectClass('${cls}')" class="glass p-4 btn-hover transition-all text-center font-medium">${cls}</button>
+            document.getElementById('classOptions').innerHTML = Object.keys(tuitionDB[loc]).map(cls => `
+                <button onclick="selectClass('${cls}')" class="glass p-4 btn-hover text-center font-medium">${cls}</button>
             `).join('');
             move(2);
         }
 
         function selectClass(cls) {
             appData.class = cls;
-            const container = document.getElementById('subjectOptions');
-            container.innerHTML = Object.keys(tuitionDB[appData.location][cls]).map(sub => `
-                <button onclick="selectSubject('${sub}')" class="glass p-4 text-left btn-hover transition-all font-medium">📚 ${sub}</button>
+            document.getElementById('subjectOptions').innerHTML = Object.keys(tuitionDB[appData.location][cls]).map(sub => `
+                <button onclick="selectSubject('${sub}')" class="glass p-4 text-left btn-hover font-medium">📚 ${sub}</button>
             `).join('');
             move(3);
         }
 
         function selectSubject(sub) {
             appData.subject = sub;
-            fetchTeachers();
+            const teachers = tuitionDB[appData.location][appData.class][sub] || [];
+            document.getElementById('teacherOptions').innerHTML = teachers.map(t => `
+                <button onclick="confirmTeacher('${t}')" class="glass p-4 text-left btn-hover flex justify-between items-center font-bold">
+                    ${t} <span class="text-[10px] bg-green-500 text-white px-2 py-1 rounded">AVAILABLE</span>
+                </button>
+            `).join('');
             move(4);
         }
 
-        function fetchTeachers() {
-            const container = document.getElementById('teacherOptions');
-            const teachers = tuitionDB[appData.location][appData.class][appData.subject] || [];
-            container.innerHTML = teachers.map(t => `
-                <button onclick="confirmTeacher('${t}')" class="glass p-4 text-left btn-hover transition-all flex justify-between items-center">
-                    <span class="font-bold">${t}</span>
-                    <span class="text-[10px] bg-green-500 text-white px-2 py-1 rounded-full">AVAILABLE</span>
-                </button>
-            `).join('');
-        }
-
-        function confirmTeacher(t) {
-            appData.teacher = t;
-            move(5);
-        }
+        function confirmTeacher(t) { appData.teacher = t; move(5); }
 
         function selectPlan(p, price) {
             appData.plan = `${p} (${price})`;
             document.getElementById('summaryList').innerHTML = `
-                <ul class="space-y-2 text-sm">
-                    <li><strong>Teacher:</strong> ${appData.teacher}</li>
-                    <li><strong>Subject:</strong> ${appData.subject}</li>
-                    <li><strong>Class:</strong> ${appData.class}</li>
-                    <li><strong>Location:</strong> ${appData.location}</li>
-                    <li class="text-blue-600"><strong>Plan:</strong> ${appData.plan}</li>
-                </ul>
-            `;
+                <div class="space-y-2">
+                    <p><strong>Teacher:</strong> ${appData.teacher}</p>
+                    <p><strong>Subject:</strong> ${appData.subject} (${appData.class})</p>
+                    <p><strong>Location:</strong> ${appData.location}</p>
+                    <p class="text-blue-600 font-bold"><strong>Plan:</strong> ${appData.plan}</p>
+                </div>`;
             move(6);
         }
 
@@ -232,17 +279,63 @@
             if (currentStep === 1) {
                 document.getElementById('formCard').classList.add('hidden');
                 document.getElementById('heroSection').classList.remove('hidden');
-            } else { move(currentStep - 1); }
+            } else move(currentStep - 1);
         }
 
+        // --- HISTORY & DELETE ---
         function sendApplication() {
-            const recipient = "imizanur13@gmail.com";
-            const subject = encodeURIComponent(`Tuition Application: ${appData.subject}`);
-            const body = encodeURIComponent(`Hello,\n\nI want to apply for tuition with ${appData.teacher}.\n\nDetails:\nSubject: ${appData.subject}\nClass: ${appData.class}\nLocation: ${appData.location}\nPlan: ${appData.plan}`);
-            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            apps.push({
+                id: Date.now(),
+                ...appData,
+                userEmail: currentUser.email,
+                date: new Date().toLocaleDateString()
+            });
+            localStorage.setItem('apps', JSON.stringify(apps));
+
+            const body = encodeURIComponent(`I'm ${currentUser.name}. I want to join ${appData.subject} with ${appData.teacher}.\n\nDetails:\nClass: ${appData.class}\nLocation: ${appData.location}\nPlan: ${appData.plan}`);
+            window.location.href = `mailto:imizanur13@gmail.com?subject=Tuition_Request&body=${body}`;
+
+            setTimeout(() => location.reload(), 1000);
         }
 
-        init();
+        function fetchHistory() {
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const userApps = apps.filter(a => a.userEmail === currentUser.email);
+            const container = document.getElementById('applicationHistory');
+
+            if (userApps.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center p-10 glass text-gray-400">No applications found. Click "New Application" to start.</div>`;
+                return;
+            }
+
+            container.innerHTML = userApps.reverse().map(app => `
+                <div class="glass p-6 relative border-t-4 border-blue-500 shadow-lg">
+                    <button onclick="deleteApp(${app.id})" class="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                    <div class="text-xs text-blue-500 font-bold mb-1 uppercase">${app.subject}</div>
+                    <h4 class="text-xl font-bold text-gray-800">${app.teacher}</h4>
+                    <p class="text-sm text-gray-600 mb-4">${app.location} | ${app.class}</p>
+                    <div class="flex justify-between items-center border-t pt-4">
+                        <span class="font-bold text-green-600">${app.plan.split(' ')[0]}</span>
+                        <span class="text-[10px] text-gray-400 font-bold">${app.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteApp(id) {
+            if (confirm("Delete this application record?")) {
+                let apps = JSON.parse(localStorage.getItem('apps')) || [];
+                apps = apps.filter(app => app.id !== id);
+                localStorage.setItem('apps', JSON.stringify(apps));
+                fetchHistory();
+            }
+        }
+
+        checkState();
     </script>
 </body>
+
 </html>
